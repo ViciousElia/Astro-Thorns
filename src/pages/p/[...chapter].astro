@@ -1,0 +1,30 @@
+---
+export const prerender = false; // Required: disable static generation
+import { getChapterData } from '../../lib/db';
+const { chapter } = Astro.params;
+const chapterPath = Array.isArray(chapter) ? chapter.join('/') : chapter || '0';
+
+// Database lookup - this runs server-side at request time
+const result = await getChapterData(chapterPath);
+
+// Redirect pattern
+if (result.chapter && result.chapter !== chapterPath) {
+  return Astro.redirect(`/p/${result.chapter}`, 301); // or 302
+}
+// Normal render
+const { content, title /* optional */, meta /* optional */ } = result;
+---
+
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<link rel="icon" href="/favicon.ico" />
+		<meta name="viewport" content="width=device-width" />
+		<meta name="generator" content={Astro.generator} />
+		<title>Page | A Tale of Thorns</title>
+	</head>
+	<body>
+		<h1>Page</h1>
+	</body>
+</html>
