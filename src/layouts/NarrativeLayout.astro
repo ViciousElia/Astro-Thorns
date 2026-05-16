@@ -1,0 +1,20 @@
+---
+const { arc, book, place, date, chapter } = Astro.props;
+
+---
+
+<div class="narrative-container">
+  <div class="narrative-header">
+    <a><h3>{arc}</h3></a>
+    <a><h3>{book}</h3></a>
+    <h4>Place: {place}</h4>
+  </div>
+  <div class="narrative-content">
+    <slot />
+  </div>
+  <div class="narrative-footer">
+    <p>Place: {place}</p>
+    <p>Date: {date}</p>
+    <p>Permalink: <a href=`/p/${chapter}`>https://rose.fruitfolio.com/p/{chapter}</a></p>
+  </div>
+</div>

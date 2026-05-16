@@ -1,6 +1,9 @@
 ---
 export const prerender = false; // Required: disable static generation
 import { getChapterData } from '../../lib/db';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import NarrativeLayout from '../../layouts/NarrativeLayout.astro';
+
 const { chapter } = Astro.params;
 const chapterPath = Array.isArray(chapter) ? chapter.join('/') : chapter || '0';
 
@@ -8,23 +11,15 @@ const chapterPath = Array.isArray(chapter) ? chapter.join('/') : chapter || '0';
 const result = await getChapterData(chapterPath);
 
 // Redirect pattern
-if (result.chapter && result.chapter !== chapterPath) {
-  return Astro.redirect(`/p/${result.chapter}`, 301); // or 302
+if (result.chapter && result.chapter+'' !== chapterPath+'') {
+  return Astro.redirect(`/p/${result.chapter}`, 302); // or 302
 }
 // Normal render
-const { content, title /* optional */, meta /* optional */ } = result;
+const { content, title, meta, arc, book, place, date } = result;
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Page | A Tale of Thorns</title>
-	</head>
-	<body>
-		<h1>Page</h1>
-	</body>
-</html>
+<BaseLayout title={title || 'Chapter '+chapterPath} meta={meta || ''}>
+  <NarrativeLayout arc={arc || ''} book={book || ''} place={place || ''} date={date || ''} chapter={chapter || chapterPath}>
+    <Fragment set:html={content} />
+  </NarrativeLayout>
+</BaseLayout>
