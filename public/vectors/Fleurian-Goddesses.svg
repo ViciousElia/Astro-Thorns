@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="320pt" height="170pt" viewBox="0 0 320 170" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <marker style="overflow:visible" id="Triangle" refX="3" refY="0" orient="auto-start-reverse" markerWidth="1" markerHeight="1" viewBox="0 0 1 1" preserveAspectRatio="xMidYMid">
+      <path transform="scale(0.5)" style="fill:context-stroke;fill-rule:evenodd;stroke:context-stroke;stroke-width:1pt" d="M 5.77,0 -2.88,5 V -5 Z" />
+    </marker>
+  </defs>
+  
+  <g>
+    <g>
+      <g>
+        <rect width="90" height="50" x="228" y="10" style="fill:#2d2d2d;fill-opacity:0.5;stroke:#5a5a5a;stroke-width:1"/>
+        <g>
+          <text x="276" y="19"  style="font-size:10px;font-family:'Liberation Serif';fill:#fff;text-anchor:end">Counsel to:</text>
+          <text x="276" y="43"  style="font-size:10px;font-family:'Liberation Serif';fill:#fff;text-anchor:end">Sister of:</text>
+          <text x="276" y="55"  style="font-size:10px;font-family:'Liberation Serif';fill:#fff;text-anchor:end">Wife of:</text>
+          <text x="276" y="31"  style="font-size:10px;font-family:'Liberation Serif';fill:#fff;text-anchor:end">Cousin of:</text>
+          <path d="m282,28 h32" style="stroke:#b46400;stroke-width:1;marker-start:url(#Triangle);marker-end:url(#Triangle)"/>
+          <path d="m282,40 h32" style="stroke:#b40064;stroke-width:1;marker-start:url(#Triangle);marker-end:url(#Triangle)"/>
+          <path d="m282,52 h32" style="stroke:#00b464;stroke-width:1;marker-start:url(#Triangle);marker-end:url(#Triangle)"/>
+          <path d="m282,16 h32" style="stroke:#6400b4;stroke-width:1;marker-end:url(#Triangle)"/>
+        </g>
+      </g>
+      
+      <g>
+        <g transform="translate(102,10)">
+          <rect width="42" height="16" x="-21" y="-8" style="fill:#5a0032;fill-opacity:0.5;stroke:#b40064;stroke-width:1"/>
+          <text x="0" y="3" style="font-size:10px;font-family:'Liberation Serif';fill:#fff;text-anchor:middle">Vaelis</text>
+        </g>
+        <g transform="translate(23,66)">
+          <rect width="42" height="16" x="-21" y="-8" style="fill:#5a0032;fill-opacity:0.5;stroke:#b40064;stroke-width:1"/>
+          <text x="0" y="3" style="font-size:10px;font-family:'Liberation Serif';fill:#fff;text-anchor:middle">Draethis</text>
+        </g>
+        <g transform="translate(181,66)">
+          <rect width="42" height="16" x="-21" y="-8" style="fill:#5a0032;fill-opacity:0.5;stroke:#b40064;stroke-width:1"/>
+          <text x="0" y="3" style="font-size:10px;font-family:'Liberation Serif';fill:#fff;text-anchor:middle">Aurelin</text>
+        </g>
+        <g transform="translate(61,150)">
+          <rect width="42" height="16" x="-21" y="-8" style="fill:#5a0032;fill-opacity:0.5;stroke:#b40064;stroke-width:1"/>
+          <text x="0" y="3" style="font-size:10px;font-family:'Liberation Serif';fill:#fff;text-anchor:middle">Salora</text>
+        </g>
+        <g transform="translate(143,150)">
+          <rect width="42" height="16" x="-21" y="-8" style="fill:#5a0032;fill-opacity:0.5;stroke:#b40064;stroke-width:1"/>
+          <text x="0" y="3" style="font-size:10px;font-family:'Liberation Serif';fill:#fff;text-anchor:middle">Lysandra</text>
+        </g>
+        <path d="M102,19    181,57"  style="stroke:#6400b4;stroke-width:1;marker-end:url(#Triangle)"/>
+        <path d="M102,19    23,57"   style="stroke:#6400b4;stroke-width:1;marker-end:url(#Triangle)"/>
+        <path d="M102,19    61,141"  style="stroke:#6400b4;stroke-width:1;marker-end:url(#Triangle)"/>
+        <path d="M102,19    143,141" style="stroke:#6400b4;stroke-width:1;marker-end:url(#Triangle)"/>
+        <path d="M181,75    143,141" style="stroke:#00b464;stroke-width:1;marker-start:url(#Triangle);marker-end:url(#Triangle)"/>
+        <path d="M61,141    23,75"   style="stroke:#b46400;stroke-width:1;marker-start:url(#Triangle);marker-end:url(#Triangle)"/>
+        <path d="M45,66     159,66"  style="stroke:#b46400;stroke-width:1;marker-start:url(#Triangle);marker-end:url(#Triangle)"/>
+        <path d="M61,141    159,66"  style="stroke:#b40064;stroke-width:1;marker-start:url(#Triangle);marker-end:url(#Triangle)"/>
+        <path d="M143,141   45,66"   style="stroke:#b40064;stroke-width:1;marker-start:url(#Triangle);marker-end:url(#Triangle)"/>
+        <path d="M83,150    121,150" style="stroke:#b40064;stroke-width:1;marker-start:url(#Triangle);marker-end:url(#Triangle)"/>
+      </g>
+    </g>
+  </g>
+</svg>

@@ -1,18 +1,21 @@
 ---
+export const prerender = false; // Required: disable static generation
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageLayout from '../layouts/PageLayout.astro';
+import '../styles/cast.css';
 
+import fs from 'node:fs/promises';
+import { marked } from 'marked';
+
+const cast = await fs.readFile('public/cast.md', 'utf-8');
+
+const castContent = marked.parse(cast);
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Cast | A Tale of Thorns</title>
-	</head>
-	<body>
+<BaseLayout title="Cast" meta="Meet the characters of A Tale of Thorns.">
+	<PageLayout>
 		<h1>Cast</h1>
-		<p>Welcome to the cast page!</p>
-	</body>
-</html>
+		<p>This page is updated very irregularly and is almost always out of date. But when it includes the stuff you need, it serves as a solid reference for the characters, their roles, and their status so far as we know.</p>
+		<Fragment set:html={castContent} />
+	</PageLayout>
+</BaseLayout>

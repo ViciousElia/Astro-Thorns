@@ -25,42 +25,37 @@ let validFiles
 	<PageLayout>
 		<h1>Archive</h1>
 		<p>Welcome to the archive!</p>
-		{
-			validArcs.map((arc)=>{
-				let arcNumber = db.arcs.findIndex(a=>a.title===arc.title);
-				return <details open id={anchorText(arc.title)}>
-					<summary><h2>{arc.title}</h2></summary>
-					{
-						validBooks.map((book)=>{
-							let bookNumber = db.arcs[arcNumber].books.findIndex(b=>b===book);
-							return arc.books.includes(book) ? <details id={anchorText(book)}>
-								<summary><h3>{book}</h3></summary>
-								<table>
-									<thead><tr>
-										<th class="abbreviate chapter">Chapter</th>
-										<th class="abbreviate place">Place</th>
-										<th>Title</th>
-										<th>Date</th>
-									</tr></thead>
-									<tbody>
-								{
-									validFiles = db.files
-									    .filter(file=>{return file.book===book && file.arc===arc.title && new Date(file.date) <= new Date() && file.title!=='cover'})
-										.sort((a,b)=> a.global_part - b.global_part)
-										.map((file) => <tr>
-											<td>{file.global_part}</td>
-											<td><a href={'/p/'+file.global_part}>{(arcNumber+1)+'-'+(bookNumber+1)+'-'+file.local_part}</a></td>
-											<td>{file.title}</td>
-											<td>{file.date}</td>
-										</tr>)
-								}
-								</tbody>
-								</table>
-							</details> : null
-						})
-					}
-				</details>
-			})
-		}
+		{validArcs.map((arc)=>{
+			let arcNumber = db.arcs.findIndex(a=>a.title===arc.title);
+			return <details open id={anchorText(arc.title)}>
+				<summary><h2>{arc.title}</h2></summary>
+				{validBooks.map((book)=>{
+					let bookNumber = db.arcs[arcNumber].books.findIndex(b=>b===book);
+					return arc.books.includes(book) ? <details id={anchorText(book)}>
+						<summary><h3>{book}</h3></summary>
+						<table>
+							<thead><tr>
+								<th class="abbreviate chapter">Chapter</th>
+								<th class="abbreviate place">Place</th>
+								<th>Title</th>
+								<th>Date</th>
+							</tr></thead>
+							<tbody>
+						{validFiles = db.files
+								.filter(file=>{return file.book===book && file.arc===arc.title && new Date(file.date) <= new Date() && file.title!=='cover'})
+								.sort((a,b)=> a.global_part - b.global_part)
+								.map((file) => <tr>
+									<td>{file.global_part}</td>
+									<td><a href={'/p/'+file.global_part}>{(arcNumber+1)+'-'+(bookNumber+1)+'-'+file.local_part}</a></td>
+									<td>{file.title}</td>
+									<td>{file.date}</td>
+								</tr>)
+						}
+						</tbody>
+						</table>
+					</details> : null
+				})}
+			</details>
+		})}
 	</PageLayout>
 </BaseLayout>

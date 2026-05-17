@@ -1,0 +1,25 @@
+summary {
+    & h3 {
+        margin-top: -1.25rem;
+        margin-left: 1.5rem;
+    }
+}
+details {
+    margin-left: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+table {
+    width: 100%;
+    & thead {
+        font-size: large;
+        & th {
+            border-bottom: 1px solid grey;
+        }
+    }
+    & tbody tr:nth-child(odd) {
+        background-color: var(--main-background);
+    }
+    & td {
+        padding-block: 0.125rem;
+    }
+}
