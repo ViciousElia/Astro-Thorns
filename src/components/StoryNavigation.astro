@@ -1,0 +1,23 @@
+---
+import '../styles/navigation.css';
+
+const { nav, chapter } = Astro.props;
+---
+<div class="story-navigation">
+  {nav.first==chapter?
+    <span> &lt; &lt; </span>:
+    <a href={`/p/${nav.first}`}> &lt; &lt; </a>
+  }
+  {nav.prev==chapter?
+    <span> &lt; </span>:
+    <a href={`/p/${nav.prev}`}> &lt; </a>
+  }
+  {nav.next==chapter?
+    <span> &gt; </span>:
+    <a href={`/p/${nav.next}`}> &gt; </a>
+  }
+  {nav.last==chapter?
+    <span> &gt; &gt; </span>:
+    <a href={`/p/${nav.last}`}> &gt; &gt; </a>
+  }
+</div>

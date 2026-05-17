@@ -1,18 +1,10 @@
 ---
-
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageLayout from '../layouts/PageLayout.astro';
 ---
-
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>About | A Tale of Thorns</title>
-	</head>
-	<body>
+<BaseLayout>
+	<PageLayout title="about" meta={{ description: "Learn more about the Thorns project and its creator, Terra." }}>
 		<h1>About</h1>
 		<p>Welcome to the about page!</p>
-	</body>
-</html>
+	</PageLayout>
+</BaseLayout>

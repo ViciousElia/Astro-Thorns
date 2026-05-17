@@ -1,0 +1,22 @@
+footer {
+    background-color: var(--primary-colour);
+}
+
+.footer-header {
+    & p {
+        padding: 0.25rem;
+        margin: 0 auto;
+        text-align: center;
+        font-size: large;
+    }
+}
+
+.footer-footer {
+    background-color: var(--major-dark);
+    color: var(--major-light);
+    & p {
+        font-size: smaller;
+        margin: 0 auto;
+        text-align: center;
+    }
+}

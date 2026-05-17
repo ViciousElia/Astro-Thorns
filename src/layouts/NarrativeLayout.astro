@@ -1,12 +1,28 @@
 ---
-const { arc, book, place, date, chapter } = Astro.props;
+const { arc, book, place, date, chapter, nav, title } = Astro.props;
 
+const arcAnchor = arc.toLowerCase().replace(/[^\w\s]/g, '').replace(/\s+/g, '-');
+const bookAnchor = book.toLowerCase().replace(/[^\w\s]/g, '').replace(/\s+/g, '-');
+
+import StoryNavigation from "../components/StoryNavigation.astro";
+import '../styles/narrative.css';
 ---
+
+<StoryNavigation nav={nav} chapter={chapter} />
+{title=='cover' ? 
+
+<div class="narrative-container">
+  <div class="narrative-content">
+    <slot />
+  </div>
+</div>
+
+: 
 
 <div class="narrative-container">
   <div class="narrative-header">
-    <a><h3>{arc}</h3></a>
-    <a><h3>{book}</h3></a>
+    <a href={`/archive#${arcAnchor}`}><h3>{arc}</h3></a>
+    <a href={`/archive#${bookAnchor}`}><h3>{book}</h3></a>
     <h4>Place: {place}</h4>
   </div>
   <div class="narrative-content">
@@ -15,6 +31,8 @@ const { arc, book, place, date, chapter } = Astro.props;
   <div class="narrative-footer">
     <p>Place: {place}</p>
     <p>Date: {date}</p>
-    <p>Permalink: <a href=`/p/${chapter}`>https://rose.fruitfolio.com/p/{chapter}</a></p>
+    <p>Permalink: <a href={`/p/${chapter}`}>https://rose.fruitfolio.com/p/{chapter}</a></p>
   </div>
 </div>
+
+}

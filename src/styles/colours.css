@@ -1,0 +1,47 @@
+:root {
+    --primary-colour: #5a0032;
+    --secondary-colour: #00b464;
+    --accent-colour: #0064b4;
+    --primary-accent: #b40064;
+
+    --primary-light: color-mix(in srgb, var(--primary-accent) 50%, white 50%);
+    --primary-dark: #2d0019;
+    --secondary-light: color-mix(in srgb, var(--secondary-colour) 50%, white 50%);
+    --secondary-dark: #005a32;
+
+    --minor-dark: #333;
+    --major-dark: #111;
+    --minor-light: #ccc;
+    --major-light: #eee;
+
+    --light-text: var(--major-dark);
+    --dark-text: var(--major-light);
+
+    --main-background: var(--minor-light);
+    --pane-background: var(--major-light);
+
+    --bar-background: color-mix(in srgb, var(--major-light) 90%, black 10%);
+    --bar-link: var(--secondary-dark);
+    --bar-link-hover: var(--accent-colour);
+
+    --primary-border: var(--accent-colour);
+    --secondary-border: var(--secondary-colour);
+    --block-border: var(--secondary-colour);
+}
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        --light-text: var(--major-light);
+        --dark-text: var(--major-dark);
+
+        --main-background: var(--major-dark);
+        --pane-background: var(--minor-dark);
+
+        --bar-background: color-mix(in srgb, var(--major-dark) 90%, white 10%);
+        --bar-link: var(--secondary-colour);
+        --bar-link-hover: var(--primary-accent);
+
+        --primary-border: var(--accent-colour);
+        --secondary-border: var(--secondary-dark);
+    }
+}

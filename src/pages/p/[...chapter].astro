@@ -19,7 +19,7 @@ const { content, title, meta, arc, book, place, date } = result;
 ---
 
 <BaseLayout title={title || 'Chapter '+chapterPath} meta={meta || ''}>
-  <NarrativeLayout arc={arc || ''} book={book || ''} place={place || ''} date={date || ''} chapter={chapter || chapterPath}>
+  <NarrativeLayout arc={arc || ''} book={book || ''} place={place || ''} date={date || ''} chapter={chapter || chapterPath} nav={result.nav} title={title}>
     <Fragment set:html={content} />
   </NarrativeLayout>
 </BaseLayout>

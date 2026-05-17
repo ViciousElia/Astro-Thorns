@@ -1,0 +1,19 @@
+.story-navigation {
+    display:flex;
+    justify-content: space-between;
+    padding: 0.5rem 10%;
+    background-color: var(--bar-background);
+    font-size: larger;
+    font-weight: bolder;
+
+    & a {
+        text-decoration: none;
+        color: var(--bar-link);
+        &:visited {
+            color: var(--bar-link);
+        }
+        &:hover {
+            color: var(--bar-link-hover);
+        }
+    }
+}

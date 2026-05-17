@@ -1,10 +1,7 @@
-import { date } from 'astro:schema';
 import { readFile, writeFile, readdir } from 'fs/promises';
 import matter from 'gray-matter';
 import { marked } from 'marked';
-import { parse } from 'path';
 
-// Enable WAL mode for concurrent reads
 let db : {
   validation: {
     length: number;
@@ -33,6 +30,7 @@ export async function getChapterData(chapter: string) {
 
   if (db && db.arcs && db.files) {
     let targetChapter = parseInt(chapter);
+    let realIndex = -1;
     const validFiles = db.files
       .filter(file => new Date(file.date).getTime() <= new Date().getTime())
       .sort((a,b)=>{return b.global_part - a.global_part});
@@ -45,34 +43,46 @@ export async function getChapterData(chapter: string) {
         return (Math.abs(curr.global_part - targetChapter) < Math.abs(prev.global_part - targetChapter) ? curr : prev);
       });
     }
+    realIndex = db.files.findIndex(file => file.global_part === goalFile.global_part);
     targetChapter = goalFile.global_part;
     try {
       const fileContent = await readFile(goalFile.path, 'utf-8');
       const { data, content } = matter(fileContent);
       const arcNumber = db.arcs.findIndex(arc => arc.title === data.arc);
       const bookNumber = db.arcs[arcNumber].books.findIndex(book => book === data.book);
+      const navItems = {
+        first: 0,
+        prev: realIndex < validFiles.length-1 ? validFiles[realIndex+1].global_part : 0,
+        next: realIndex > 0 ? validFiles[realIndex-1].global_part : validFiles[0].global_part,
+        last: validFiles[0].global_part
+      }
       return {
         chapter: targetChapter,
         title: data.title || '',
         content: marked(content),
         meta: data.description || '',
-        date: data.date_published || '',
+        date: (data.date_published?.toISOString?.().split('T')[0] ?? data.date_published) || '',
         place: (arcNumber+1) + '-' + (bookNumber+1) + '-' + data.chapter_number,
         arc: data.arc || '',
-        book: data.book || ''
+        book: data.book || '',
+        nav: navItems
       };
     } catch (err) {
       console.log('Error reading chapter file:', err);
     }
   }
-  // Placeholder function to simulate fetching chapter data from a database
+  // Placeholder return value to simulate fetching chapter data from a database in case everything fails.
+  // Keeping this in so the page renders instead of breaking. Do not remove. Period.
   return {
       chapter: chapter,
       title: `Chapter ${chapter}`,
       content: `This is the content of chapter ${chapter}.`,
       meta: `This is some meta information about chapter ${chapter}.`,
       date: new Date().toISOString(),
-      place: '0-0-'+chapter
+      place: '0-0-'+chapter,
+      arc: '',
+      book: '',
+      nav: { first: 0, prev: 0, next: 0, last: 0 }
   };
 }
 
@@ -82,7 +92,7 @@ async function loadDB() {
       const data = await readFile(DB_PATH, 'utf-8');
       db = JSON.parse(data);
     } catch (err) {
-      console.log('Error loading DB:', err, 'Rebuilding DB...');
+      console.log('Error loading DB. Rebuilding DB...');
     }
   }
   if (!db) await rebuildDB();
@@ -117,7 +127,7 @@ async function rebuildDB() {
       const fileInfo = {
         title: data.title || '',
         path: filePath,
-        date: data.date_published || '',
+        date: (data.date_published?.toISOString?.().split('T')[0] ?? data.date_published) || '',
         local_part: data.chapter_number || 0,
         global_part: data.global_part || 0,
         book: data.book || '',
