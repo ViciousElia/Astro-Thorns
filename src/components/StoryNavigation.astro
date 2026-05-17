@@ -1,9 +1,9 @@
 ---
 import '../styles/navigation.css';
 
-const { nav, chapter } = Astro.props;
+const { nav, chapter, second } = Astro.props;
 ---
-<div class="story-navigation">
+<div class={`story-navigation${second ? ' bottom' : ''}`}>
   {nav.first==chapter?
     <span> &lt; &lt; </span>:
     <a href={`/p/${nav.first}`}> &lt; &lt; </a>

@@ -1,12 +1,14 @@
 .story-navigation {
     display:flex;
     justify-content: space-between;
-    padding: 0.5rem 10%;
+    padding: 0 10%;
     background-color: var(--bar-background);
     font-size: larger;
     font-weight: bolder;
 
     & a {
+        cursor: pointer;
+        padding: 0.5rem 2rem;
         text-decoration: none;
         color: var(--bar-link);
         &:visited {
@@ -16,4 +18,8 @@
             color: var(--bar-link-hover);
         }
     }
+}
+.story-navigation.bottom a {
+    padding: 0.25rem 1rem;
+    font-size: medium;
 }

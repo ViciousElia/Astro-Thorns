@@ -86,7 +86,7 @@ export async function getChapterData(chapter: string) {
   };
 }
 
-async function loadDB() {
+export async function loadDB() {
   if (!db){
     try {
       const data = await readFile(DB_PATH, 'utf-8');

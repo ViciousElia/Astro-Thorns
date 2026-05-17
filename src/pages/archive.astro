@@ -1,18 +1,66 @@
 ---
+export const prerender = false; // Required: disable static generation
+import BaseLayout from "../layouts/BaseLayout.astro"
+import PageLayout from "../layouts/PageLayout.astro"
+import { loadDB } from "../lib/db.js";
+import '../styles/archive.css';
 
+const db = await loadDB();
+
+const validArcs = db.arcs.filter(arc => {
+  // Check if arc contains at least one book that has published files
+  return arc.books.some(book => {
+	return db.files.some(file => file.book === book && new Date(file.date) <= new Date());
+  });
+});
+const validBooks = validArcs.flatMap(arc => arc.books.filter(book => {
+  // Check if this specific book has published files
+  return db.files.some(file => file.book === book && new Date(file.date) <= new Date());
+}));
+
+function anchorText(text:string) { return text.toLowerCase().replace(/[^\w\s]/g, '').replace(/\s+/g, '-');}
+let validFiles
 ---
-
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Archive | A Tale of Thorns</title>
-	</head>
-	<body>
+<BaseLayout title="Archive" meta="Explore the archive of all published chapters, organized by arc and book.">
+	<PageLayout>
 		<h1>Archive</h1>
 		<p>Welcome to the archive!</p>
-	</body>
-</html>
+		{
+			validArcs.map((arc)=>{
+				let arcNumber = db.arcs.findIndex(a=>a.title===arc.title);
+				return <details open id={anchorText(arc.title)}>
+					<summary><h2>{arc.title}</h2></summary>
+					{
+						validBooks.map((book)=>{
+							let bookNumber = db.arcs[arcNumber].books.findIndex(b=>b===book);
+							return arc.books.includes(book) ? <details id={anchorText(book)}>
+								<summary><h3>{book}</h3></summary>
+								<table>
+									<thead><tr>
+										<th class="abbreviate chapter">Chapter</th>
+										<th class="abbreviate place">Place</th>
+										<th>Title</th>
+										<th>Date</th>
+									</tr></thead>
+									<tbody>
+								{
+									validFiles = db.files
+									    .filter(file=>{return file.book===book && file.arc===arc.title && new Date(file.date) <= new Date() && file.title!=='cover'})
+										.sort((a,b)=> a.global_part - b.global_part)
+										.map((file) => <tr>
+											<td>{file.global_part}</td>
+											<td><a href={'/p/'+file.global_part}>{(arcNumber+1)+'-'+(bookNumber+1)+'-'+file.local_part}</a></td>
+											<td>{file.title}</td>
+											<td>{file.date}</td>
+										</tr>)
+								}
+								</tbody>
+								</table>
+							</details> : null
+						})
+					}
+				</details>
+			})
+		}
+	</PageLayout>
+</BaseLayout>
