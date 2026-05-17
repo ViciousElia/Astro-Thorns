@@ -6,18 +6,18 @@ const { nav, chapter, second } = Astro.props;
 <div class={`story-navigation${second ? ' bottom' : ''}`}>
   {nav.first==chapter?
     <span> &lt; &lt; </span>:
-    <a href={`/p/${nav.first}`}> &lt; &lt; </a>
+    <span><a href={`/p/${nav.first}`}> &lt; &lt; </a></span>
   }
   {nav.prev==chapter?
     <span> &lt; </span>:
-    <a href={`/p/${nav.prev}`}> &lt; </a>
+    <span><a href={`/p/${nav.prev}`}> &lt; </a></span>
   }
   {nav.next==chapter?
     <span> &gt; </span>:
-    <a href={`/p/${nav.next}`}> &gt; </a>
+    <span><a href={`/p/${nav.next}`}> &gt; </a></span>
   }
   {nav.last==chapter?
     <span> &gt; &gt; </span>:
-    <a href={`/p/${nav.last}`}> &gt; &gt; </a>
+    <span><a href={`/p/${nav.last}`}> &gt; &gt; </a></span>
   }
 </div>

@@ -1,14 +1,13 @@
 .story-navigation {
     display:flex;
     justify-content: space-between;
-    padding: 0 10%;
+    padding: 0 15%;
     background-color: var(--bar-background);
     font-size: larger;
     font-weight: bolder;
-
     & a {
         cursor: pointer;
-        padding: 0.5rem 2rem;
+        padding: 0.5rem 1.5rem;
         text-decoration: none;
         color: var(--bar-link);
         &:visited {
@@ -18,8 +17,19 @@
             color: var(--bar-link-hover);
         }
     }
+    & span {
+        padding: 0.5rem 1.5rem;
+        &:has(a) {
+            padding-inline: 0;
+        }
+    }
 }
-.story-navigation.bottom a {
-    padding: 0.25rem 1rem;
-    font-size: medium;
+.story-navigation.bottom {
+    & span {
+        padding: 0.25rem 1rem;
+    }
+    & a {
+        padding: 0.25rem 1rem;
+        font-size: medium;
+    }
 }

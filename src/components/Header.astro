@@ -1,11 +1,14 @@
 ---
-
+import '../styles/header.css'
 ---
 
 <header>
   <nav aria-label="Main navigation">
     <ul class="nav-list">
-      <li><a href="/">Home</a></li>
+      <li class="menu-button">
+          <label for="menuCheck">Menu</label><input type="checkbox" id="menuCheck" class="menu-toggle">
+      </li>
+      <li><a href="/"><img src="/vectors/Rose.svg" height="31px"/></a></li>
       <li><a href="/archive">Archive</a></li>
       <li><a href="/cast">Cast</a></li>
       <li><a href="/about">About</a></li>

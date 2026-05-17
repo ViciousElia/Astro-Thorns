@@ -1,17 +1,18 @@
 ---
+export const prerender = false; // Required: disable static generation
 
+import BaseLayout from "../layouts/BaseLayout.astro"
+import NarrativeLayout from "../layouts/NarrativeLayout.astro"
+import { getChapterData } from "../lib/db";
+
+// Database lookup - this runs server-side at request time
+const result = await getChapterData('999999999');
+
+// Normal render
+const { content, title, meta, arc, book, place, date } = result;
 ---
-
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>A Tale of Thorns</title>
-	</head>
-	<body>
-		<h1>A Tale of Thorns</h1>
-	</body>
-</html>
+<BaseLayout title={title || 'Chapter '+result.chapter} meta={meta || ''}>
+  <NarrativeLayout arc={arc || ''} book={book || ''} place={place || ''} date={date || ''} chapter={result.chapter || ''} nav={result.nav} title={title}>
+    <Fragment set:html={content} />
+  </NarrativeLayout>
+</BaseLayout>

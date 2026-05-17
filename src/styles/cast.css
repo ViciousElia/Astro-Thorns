@@ -1,4 +1,5 @@
 summary {
+    cursor: pointer;
     & h3 {
         margin-top: -1.25rem;
         margin-left: 1.5rem;
@@ -20,6 +21,7 @@ table {
         background-color: var(--main-background);
     }
     & td {
-        padding-block: 0.125rem;
+        padding: 0.125rem;
+        padding-inline:0.25rem;
     }
 }
